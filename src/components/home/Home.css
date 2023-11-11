@@ -1,0 +1,14 @@
+.home {
+  background-image: url("../../assets/home_bg.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  color: white;
+}
+
+.btn-text {
+  background-color: Transparent;
+  color: #fff;
+}
