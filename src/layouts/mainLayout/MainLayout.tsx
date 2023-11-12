@@ -2,17 +2,16 @@ import { Outlet } from "react-router-dom";
 import { Header } from "../header";
 import { Footer } from "../footer";
 import { Layout } from "antd";
+import "./MainLayout.css";
 
 const { Content } = Layout;
 
 const MainLayout = () => {
   return (
-    <Layout className="layout">
+    <Layout className="container">
       <Header />
-      <Content>
-        <div style={{ backgroundColor: "#fff", height: "auto" }}>
-          <Outlet />
-        </div>
+      <Content className="main">
+        <Outlet />
       </Content>
       <Footer />
     </Layout>

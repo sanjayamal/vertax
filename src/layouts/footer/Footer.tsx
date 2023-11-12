@@ -8,9 +8,6 @@ const MainFooter = () => {
       style={{
         backgroundColor: "#fff",
         textAlign: "center",
-        position: "absolute",
-        bottom: "0",
-        width: "100%",
       }}
     >
       Copyright ©2023 VerTax

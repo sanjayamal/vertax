@@ -1,6 +1,7 @@
 import { TitleWithBackButton } from "../titleWithBackButton";
 import { Col, Row, Tabs } from "antd";
 import type { TabsProps } from "antd";
+import { FileProcessor } from "../fileProcessor";
 
 const items: TabsProps["items"] = [
   {
@@ -10,7 +11,7 @@ const items: TabsProps["items"] = [
         3 Parties 2<sup>nd</sup> Position
       </span>
     ),
-    children: "Content of Tab Pane 1",
+    children: <FileProcessor type="purchase" parties={3} positions={2} />,
   },
   {
     key: "2",
@@ -19,7 +20,7 @@ const items: TabsProps["items"] = [
         2 Parties 2<sup>nd</sup> Position
       </span>
     ),
-    children: "Content of Tab Pane 2",
+    children: <FileProcessor type="purchase" parties={2} positions={2} />,
   },
 ];
 

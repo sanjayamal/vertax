@@ -1,6 +1,7 @@
-import { Button, Col, Row, Space, Typography } from "antd";
+import { Button, Col, Flex, Row, Space, Typography } from "antd";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
+import HomeHeader from "./homeHeader/HomeHeader";
 
 const { Title } = Typography;
 
@@ -12,8 +13,9 @@ const Home = () => {
   };
   return (
     <div className="home">
+      <HomeHeader />
       <Row>
-        <Col span={8} offset={3} style={{ marginTop: "6rem" }}>
+        <Col span={8} offset={3} style={{ marginTop: "2rem" }}>
           <Space direction="vertical" style={{ display: "flex" }}>
             <Title style={{ color: "#fff" }} level={5}>
               Als HeyVAT GmbH liegt unser Tax Technology-Fokus auf der
@@ -27,14 +29,26 @@ const Home = () => {
               Umsatzsteuerbereich weiterentwickeln wollen – wir haben die
               Erfahrung und das Fachwissen, um Sie zu unterstützen.
             </Title>
-            <Space>
-              <Button size="large" className="btn-text" onClick={()=>handleOnClick('purchase')}>
-                Purchase Order
-              </Button>
-              <Button size="large" className="btn-text" onClick={()=>handleOnClick('sales')}>
-                Sales Order
-              </Button>
-            </Space>
+            <Row gutter={4}>
+              <Col span={8}>
+                <Button
+                  className="btn-text"
+                  style={{ width: "100%" }}
+                  onClick={() => handleOnClick("purchase")}
+                >
+                  Purchase Order
+                </Button>
+              </Col>
+              <Col span={8}>
+                <Button
+                  className="btn-text"
+                  onClick={() => handleOnClick("sales")}
+                  style={{ width: "100%" }}
+                >
+                  Sales Order
+                </Button>
+              </Col>
+            </Row>
           </Space>
         </Col>
         <Col span={8} offset={4}></Col>
