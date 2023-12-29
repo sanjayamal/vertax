@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Header } from "../header";
 import { Footer } from "../footer";
 import { Layout } from "antd";
-import "./MainLayout.css";
+import "./MainLayout.scss";
 
 const { Content } = Layout;
 

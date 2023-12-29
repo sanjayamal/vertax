@@ -1,0 +1,32 @@
+@import "../../App.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: $appBackgroundColor;
+}
+
+.menu {
+  background-color: $appBackgroundColor;
+  flex: 0.3;
+  min-width: 0;
+  color: $appFontColor;
+  font-weight: bold;
+}
+
+:where(.css-dev-only-do-not-override-1adbn6x).ant-menu-light
+  .ant-menu-item:not(.ant-menu-item-selected):not(
+    .ant-menu-submenu-selected
+  ):hover {
+  color: $appFontColor;
+}
+
+.ant-menu-horizontal,
+.ant-menu-item::after,
+.ant-menu-submenu::after {
+  border: none !important;
+}
+
+.description {
+  color: $appFontColor !important;
+}

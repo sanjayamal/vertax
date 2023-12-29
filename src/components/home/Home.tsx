@@ -1,7 +1,7 @@
 import { Button, Col, Flex, Row, Space, Typography } from "antd";
-import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import HomeHeader from "./homeHeader/HomeHeader";
+import "./Home.scss";
 
 const { Title } = Typography;
 

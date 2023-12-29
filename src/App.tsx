@@ -1,33 +1,6 @@
-import React from "react";
-import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, Login, PurchaseOrder, SalesOrder } from "./components";
-import { MainLayout } from "./layouts/mainLayout";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
-  {
-    path: "/home",
-    element: <Home />,
-  },
-  {
-    path: "/order",
-    element: <MainLayout />,
-    children: [
-      {
-        path: "sales",
-        element: <SalesOrder />,
-      },
-      {
-        path: "purchase",
-        element: <PurchaseOrder />,
-      },
-    ],
-  },
-]);
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
+import "./App.scss";
 
 function App() {
   return <RouterProvider router={router} />;

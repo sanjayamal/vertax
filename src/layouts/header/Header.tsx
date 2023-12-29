@@ -1,6 +1,8 @@
-import { Avatar, Layout, Typography } from "antd";
+import { Avatar, Layout, Typography, Menu, Button } from "antd";
 import vertax_small from "../../assets/vertax_small.jpg";
 import { useNavigate } from "react-router-dom";
+import "./Header.scss";
+import { UserInfo } from "../../components";
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -8,32 +10,31 @@ const { Title } = Typography;
 const MainHeader = () => {
   const navigate = useNavigate();
 
+  const items = [
+    { key: 1, label: "Home", isAdminOnly: false },
+    { key: 2, label: "Manage User", isAdminOnly: true },
+    { key: 3, label: <UserInfo />, isAdminOnly: false },
+  ];
   const handleOnClick = () => {
-    navigate("/home");
+    navigate("/");
+  };
+
+  const getItem = (isAdmin: boolean) => {
+    return isAdmin ? items : items.filter(({ isAdminOnly }) => !isAdminOnly);
   };
   return (
-    <Header
-      style={{
-        backgroundColor: "#fff",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        padding: "1rem",
-      }}
-    >
-      <Avatar
+    <Header className="header">
+      <img
         style={{ marginRight: "15px" }}
-        size={64}
         src={vertax_small}
         onClick={() => handleOnClick()}
       />
-      <Title
-        level={2}
-        onClick={() => handleOnClick()}
-        style={{ cursor: "pointer" }}
-      >
-        VerTax
-      </Title>
+      <Menu
+        className="menu"
+        mode="horizontal"
+        defaultSelectedKeys={["1"]}
+        items={getItem(true)}
+      />
     </Header>
   );
 };

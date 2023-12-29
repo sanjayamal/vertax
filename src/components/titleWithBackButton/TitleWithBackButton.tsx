@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./TitleWithBackButton.css";
 import { Button, Typography } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import "./TitleWithBackButton.scss";
 
 const { Title } = Typography;
 interface ITitleWithBackButton {
