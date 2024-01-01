@@ -1,0 +1,7 @@
+@import "../../../App.scss";
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: $appBackgroundColor;
+}

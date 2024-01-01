@@ -1,5 +1,6 @@
 import { RcFile } from "antd/es/upload";
 import { utils, read } from "xlsx";
+import { ADMIN_MENU_ITEM_KEY } from "./constants";
 
 export const getRowCounts = (file: RcFile) => {
   return new Promise<number>(async (resolve, reject) => {
@@ -16,4 +17,34 @@ export const getRowCounts = (file: RcFile) => {
       reject(err);
     }
   });
+};
+
+export const getAdminNavigationPath = (key: number): string => {
+  try {
+    switch (key) {
+      case ADMIN_MENU_ITEM_KEY.user:
+        return "user-management";
+      case ADMIN_MENU_ITEM_KEY.Account:
+        return "account-management";
+      default:
+        return "admin";
+    }
+  } catch (error) {
+    return "admin";
+  }
+};
+
+export const getAdminNavigationKey = (path: string): string => {
+  try {
+    switch (path) {
+      case "user-management":
+        return `${ADMIN_MENU_ITEM_KEY.user}`;
+      case "account-management":
+        return `${ADMIN_MENU_ITEM_KEY.Account}`;
+      default:
+        return `${ADMIN_MENU_ITEM_KEY.Account}`;
+    }
+  } catch (error) {
+    return `${ADMIN_MENU_ITEM_KEY.Account}`;
+  }
 };

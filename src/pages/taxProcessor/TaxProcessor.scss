@@ -1,0 +1,14 @@
+@import "../../App.scss";
+
+.tax-home {
+  background-color: $appBackgroundColor;
+  color: $appFontColor;
+  min-height: calc(100vh - 125px);
+}
+
+.order-btn {
+  background-color: #0173bb;
+  border: #0173bb;
+  color: #fff;
+  min-width: 120px;
+}

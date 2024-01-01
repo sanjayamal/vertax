@@ -1,7 +1,7 @@
-import { TitleWithBackButton } from "../titleWithBackButton";
+import { TitleWithBackButton } from "../../components/titleWithBackButton";
 import { Col, Row, Tabs } from "antd";
 import type { TabsProps } from "antd";
-import { FileProcessor } from "../fileProcessor";
+import { FileProcessor } from "../../components/fileProcessor";
 
 const items: TabsProps["items"] = [
   {
