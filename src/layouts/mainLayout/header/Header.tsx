@@ -1,5 +1,4 @@
-import { Avatar, Layout, Typography, Menu, Button } from "antd";
-import vertax_small from "../../../assets/vertax_small.jpg";
+import { Layout, Typography, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./Header.scss";
 import { AccountModal, UserInfo } from "../../../components";

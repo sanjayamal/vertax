@@ -1,5 +1,4 @@
 import { Col, Row } from "antd";
-import React from "react";
 import UserTable from "./components/UserTable";
 
 const UserManagement = () => {
