@@ -1,4 +1,6 @@
 import { Button, Col, Row, Space, Typography } from "antd";
+import verTaxImage from "../../../assets/vertax.png";
+
 const { Title, Text } = Typography;
 
 const HeroSection = () => {
@@ -30,8 +32,8 @@ const HeroSection = () => {
               </div>
             </div>
             <Title level={5} className="description margin-top-minus-0-5rem">
-              Process/system consulting and tax advice from a single source –
-              revolutionize your VAT processes: quickly and effectively.
+              Welcome to our Tax Technology Tools to support efficiency and
+              effectiveness of VAT operations.
             </Title>
             <Button className="more-btn">More Detail</Button>
           </Space>
@@ -44,10 +46,7 @@ const HeroSection = () => {
           xl={12}
           className="padding-1rem center-item"
         >
-          <img
-            width={400}
-            src="https://usercontent.one/wp/www.heyvat.de/wp-content/uploads/2023/02/HelloVat-Logo-Home-nurStern-993x1024.png?media=1681150648"
-          />
+          <img width={400} alt="verTaxImage" src={verTaxImage} />
         </Col>
       </Row>
     </div>

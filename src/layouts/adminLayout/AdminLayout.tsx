@@ -4,7 +4,7 @@ import { Layout, Menu } from "antd";
 import { AdminFooter } from "./footer";
 import { UserOutlined, ApiOutlined } from "@ant-design/icons";
 import { ADMIN_MENU_ITEM_KEY } from "../../utils/constants";
-import { getAdminNavigationPath } from "../../utils/functions";
+import { getAdminNavigationPath } from "../../utils/functions/functions";
 import "./AdminLayout.scss";
 
 const { Content, Sider } = Layout;
@@ -41,7 +41,7 @@ const AdminLayout = () => {
               mode="inline"
               defaultSelectedKeys={["0"]}
               items={menuItems}
-              onClick={({ key }) => {
+              onClick={({ key }: any) => {
                 handleMenuNavigation(+key);
               }}
             />

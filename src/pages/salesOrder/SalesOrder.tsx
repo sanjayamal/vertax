@@ -17,10 +17,10 @@ const items: TabsProps["items"] = [
     key: "2",
     label: (
       <span>
-        2 Parties 2<sup>nd</sup> Position
+        2 Parties 1<sup>st</sup> Position
       </span>
     ),
-    children: <FileProcessor type="sales" parties={2} positions={2} />,
+    children: <FileProcessor type="sales" parties={2} positions={1} />,
   },
 ];
 

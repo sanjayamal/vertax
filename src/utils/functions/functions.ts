@@ -1,6 +1,7 @@
 import { RcFile } from "antd/es/upload";
 import { utils, read } from "xlsx";
-import { ADMIN_MENU_ITEM_KEY } from "./constants";
+import { ADMIN_MENU_ITEM_KEY } from "../constants";
+import axios from "axios";
 
 export const getRowCounts = (file: RcFile) => {
   return new Promise<number>(async (resolve, reject) => {
@@ -17,6 +18,19 @@ export const getRowCounts = (file: RcFile) => {
       reject(err);
     }
   });
+};
+
+export const readExcelData = async (file: RcFile) => {
+  try {
+    const ab = await file.arrayBuffer();
+    const workbook = read(ab); // parse the array buffer
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    const data = utils.sheet_to_json(sheet, { raw: false }) as any;
+    return data;
+  } catch (error) {
+    return [];
+  }
 };
 
 export const getAdminNavigationPath = (key: number): string => {
@@ -46,5 +60,26 @@ export const getAdminNavigationKey = (path: string): string => {
     }
   } catch (error) {
     return `${ADMIN_MENU_ITEM_KEY.Account}`;
+  }
+};
+
+export const getSoapServiceResponse = async (
+  url: string,
+  xmlString: string|undefined
+) => {
+  try {
+    const { data } = await axios.post(
+      "https://gea.eu.ondemand.vertexinc.com:443/vertex-ws/services/CalculateTax90",
+      xmlString,
+      {
+        headers: {
+          "Content-Type": "text/xml; charset=utf-8",
+        },
+      }
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
   }
 };

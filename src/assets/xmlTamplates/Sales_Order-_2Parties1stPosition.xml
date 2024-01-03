@@ -1,0 +1,90 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:vertexinc:o-series:tps:9:0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:VertexEnvelope>
+         <urn:Login>
+            <!--Optional:-->
+            <urn:UserName>${#Project#Username}</urn:UserName>
+            <!--Optional:-->
+            <urn:Password>${#Project#Password}</urn:Password>
+            <!--Optional:-->
+            <urn:TrustedId>${#Project#TrustedId}</urn:TrustedId>
+         </urn:Login>
+         <QuotationRequest documentNumber="${#TestSuite#Document Number}" documentDate="${#TestSuite#Document Date }" transactionType="${#TestSuite#Transaction Type}">
+            <Currency isoCurrencyCodeAlpha="EUR">${#TestSuite#Currency}</Currency>
+            <Seller>
+               <Company>${#TestSuite#Seller company}</Company>
+            </Seller>
+            <LineItem lineItemNumber="0" deliveryTerm="${#TestSuite#DeliveryTerm}" netMassKilograms="0" exportProcedure="CFA" taxDate="${#TestSuite#Tax Date}">
+               <Seller>
+                  <PhysicalOrigin>
+                     <PostalCode>${#TestSuite#Physical Origin Postal Code}</PostalCode>
+                     <Country>${#TestSuite#Physical Origin Country}</Country>
+                     <MainDivision>${#TestSuite#Physical Origin RegionCode}</MainDivision>
+                  </PhysicalOrigin>
+                  <AdministrativeOrigin>
+                     <PostalCode>${#TestSuite#AdministrativeOrigin Postal}</PostalCode>
+                     <Country>${#TestSuite#AdministrativeOrigin Country}</Country>
+                     <MainDivision>${#TestSuite#AdministrativeOrigin RegionCode}</MainDivision>
+                  </AdministrativeOrigin>
+               </Seller>
+               <Customer>
+                  <CustomerCode classCode="${#TestSuite#CustomerCode classCode}" isBusinessIndicator="${#TestSuite#Customer is buisnessIndicator}">${#TestSuite#Customer}</CustomerCode>
+                  <Destination>
+                     <PostalCode>${#TestSuite#AdministrativeDestination Postal}</PostalCode>
+                     <Country>${#TestSuite#AdministrativeDestination Country}</Country>
+                     <MainDivision>${#TestSuite#AdministrativeDestination RegionCode}</MainDivision>
+                     >
+                  </Destination>
+                  <AdministrativeDestination>
+                     <PostalCode>${#TestSuite#AdministrativeDestination Postal}</PostalCode>
+                     <Country>${#TestSuite#Destination Country}</Country>
+                     <MainDivision>${#TestSuite#AdministrativeDestination RegionCode}</MainDivision>
+                  </AdministrativeDestination>
+                  <TaxRegistration hasPhysicalPresenceIndicator="${#TestSuite#TaxRegistration hasPhysicalPresenceIndicator}" isoCountryCode="${#TestSuite#Customer VAT Iso Country code}">
+                     <TaxRegistrationNumber>${#TestSuite#Customer TaxRegistrationNumber}</TaxRegistrationNumber>
+                  </TaxRegistration>
+               </Customer>
+               <Product productClass="${#TestSuite#ProductClass}">${#TestSuite#Product}</Product>
+               <UnitPrice>599.0</UnitPrice>
+               <ExtendedPrice>${#TestSuite#Extended Price}</ExtendedPrice>
+               <CommodityCode commodityCodeType="${#TestSuite#Commodity Code Type}">${#TestSuite#Commodity Code}</CommodityCode>
+               <FlexibleFields>
+                  <FlexibleCodeField fieldId="1">${#TestSuite#Flexible Field 1}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="2">${#TestSuite#Flexible Field 2}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="3">${#TestSuite#Flexible Field 3}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="4">${#TestSuite#Flexible Field 4}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="4">${#TestSuite#Flexible Field 4}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="5">${#TestSuite#Flexible Field 5}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="6">${#TestSuite#Flexible Field 6}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="7">${#TestSuite#Flexible Field 7}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="8">${#TestSuite#Flexible Field 8}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="9">${#TestSuite#Flexible Field 9}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="10">${#TestSuite#Flexible Field 10}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="11">${#TestSuite#Flexible Field 11}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="12">${#TestSuite#Flexible Field 12}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="13">${#TestSuite#Flexible Field 13}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="14">${#TestSuite#Flexible Field 14}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="15">${#TestSuite#Flexible Field 15}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="16">${#TestSuite#Flexible Field 16}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="17">${#TestSuite#Flexible Field 17}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="18">${#TestSuite#Flexible Field 18}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="19">${#TestSuite#Flexible Field 19}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="20">${#TestSuite#Flexible Field 20}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="21">${#TestSuite#Flexible Field 21}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="22">${#TestSuite#Flexible Field 22}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="23">${#TestSuite#Flexible Field 23}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="24">${#TestSuite#Flexible Field 24}</FlexibleCodeField>
+                  <FlexibleCodeField fieldId="25">${#TestSuite#Flexible Field 25}</FlexibleCodeField>
+               </FlexibleFields>
+            </LineItem>
+         </QuotationRequest>
+         <ApplicationData>
+            <MessageLogging returnLogEntries="true">
+               <OverrideLoggingThreshold thresholdScope="com.vertexinc.tps.common.domain.Transaction">SUPPORT</OverrideLoggingThreshold>
+               <OverrideLoggingThreshold>SUPPORT</OverrideLoggingThreshold>
+            </MessageLogging>
+         </ApplicationData>
+      </urn:VertexEnvelope>
+   </soapenv:Body>
+</soapenv:Envelope>

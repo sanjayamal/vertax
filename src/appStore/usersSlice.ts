@@ -1,24 +1,29 @@
+import { IAccount } from "./../interfaces";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../appStore/store";
 
-// Define a type for the slice state
 interface UsersSliceState {
   usersList: [];
   currentUser: any;
-  currentUserAccountDetail: any;
+  currentUserAccountDetail: IAccount;
 }
+const initialCurrentUserAccountDetail = {
+  service:
+    "https://gea.eu.ondemand.vertexinc.com:443/vertex-ws/services/CalculateTax90",
+  username: "Christian_Odendahl_test",
+  password: "iN3fAB?6",
+  trustedId: "$tr.Ia8ww3pn",
+};
 
-// Define the initial state using that type
 const initialState: UsersSliceState = {
   usersList: [],
   currentUser: null,
-  currentUserAccountDetail: null,
+  currentUserAccountDetail: initialCurrentUserAccountDetail,
 };
 
 export const usersSlice = createSlice({
   name: "users",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     setUser: () => {},
@@ -27,7 +32,7 @@ export const usersSlice = createSlice({
 
 export const { setUser } = usersSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
-// export const selectCount = (state: RootState) => state.counter.value;
+export const selectCurrentUserAccountDetail = (state: RootState) =>
+  state.users.currentUserAccountDetail;
 
 export default usersSlice.reducer;

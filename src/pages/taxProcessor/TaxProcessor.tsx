@@ -1,10 +1,17 @@
-import { Button, Col, Flex, Row, Space, Typography } from "antd";
+import { Button, Col, Flex, Row, Space, Tooltip, Typography } from "antd";
 import "./TaxProcessor.scss";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { AccountModal } from "../../components";
+import { UserSwitchOutlined } from "@ant-design/icons";
+import verTaxImage from "../../assets/vertax.png";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const TaxProcessor = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+
   const navigation = useNavigate();
   const handleClick = (path: string) => {
     navigation(`/order/${path}`);
@@ -29,6 +36,20 @@ const TaxProcessor = () => {
               padding: "2rem",
             }}
           >
+            {!isConnected ? (
+              <Button className="order-btn" onClick={() => setOpenModal(true)}>
+                Connect to Account
+              </Button>
+            ) : (
+              <Tooltip title="Change Account">
+                <Button
+                  type="primary"
+                  shape="circle"
+                  icon={<UserSwitchOutlined />}
+                  onClick={() => setOpenModal(true)}
+                />
+              </Tooltip>
+            )}
             <Title level={5} className="description margin-top-minus-0-5rem">
               Als HeyVAT GmbH liegt unser Tax Technology-Fokus auf der
               Implementierung von Steuerfindungsprodukten wie ERP Add-ons /
@@ -42,19 +63,22 @@ const TaxProcessor = () => {
               Erfahrung und das Fachwissen, um Sie zu unterstützen.
             </Title>
             <Flex gap="middle">
-              <Button
-                className="order-btn"
-                onClick={() => handleClick("purchase")}
-              >
-                Purchase Order
-              </Button>
-              <Button
-                className="order-btn"
-                onClick={() => handleClick("sales")}
-              >
-                {" "}
-                Sales Order
-              </Button>
+              {isConnected && (
+                <>
+                  <Button
+                    className="order-btn"
+                    onClick={() => handleClick("purchase")}
+                  >
+                    Purchase Order
+                  </Button>
+                  <Button
+                    className="order-btn"
+                    onClick={() => handleClick("sales")}
+                  >
+                    Sales Order
+                  </Button>
+                </>
+              )}
             </Flex>
           </Space>
         </Col>
@@ -66,12 +90,18 @@ const TaxProcessor = () => {
           xl={12}
           className="padding-1rem center-item"
         >
-          <img
-            width={400}
-            src="https://usercontent.one/wp/www.heyvat.de/wp-content/uploads/2023/02/HelloVat-Logo-Home-nurStern-993x1024.png?media=1681150648"
-          />
+          <img width={400} alt="verTaxImage" src={verTaxImage} />
         </Col>
       </Row>
+      <AccountModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        handleConnect={() => {
+          setOpenModal(false);
+          setIsConnected(true);
+        }}
+        handleUpdate={() => {}}
+      />
     </div>
   );
 };
