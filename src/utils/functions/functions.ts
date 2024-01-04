@@ -2,6 +2,8 @@ import { RcFile } from "antd/es/upload";
 import { utils, read } from "xlsx";
 import { ADMIN_MENU_ITEM_KEY } from "../constants";
 import axios from "axios";
+import ExcelJS from "exceljs";
+import { saveAs } from "file-saver";
 
 export const getRowCounts = (file: RcFile) => {
   return new Promise<number>(async (resolve, reject) => {
@@ -65,7 +67,7 @@ export const getAdminNavigationKey = (path: string): string => {
 
 export const getSoapServiceResponse = async (
   url: string,
-  xmlString: string|undefined
+  xmlString: string | undefined
 ) => {
   try {
     const { data } = await axios.post(
@@ -81,5 +83,42 @@ export const getSoapServiceResponse = async (
     return data;
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const handleModifyExcel = async (
+  file: RcFile,
+  dataMapsArr: Array<Map<number, string>>
+) => {
+  try {
+    const workbook = new ExcelJS.Workbook();
+    const fileReader = new FileReader();
+
+    fileReader.onload = async (e: any) => {
+      const buffer = e.target.result;
+      await workbook.xlsx.load(buffer);
+      const sheetName = workbook.worksheets[0];
+      const worksheet = workbook.getWorksheet(sheetName.name);
+
+      if (worksheet) {
+        dataMapsArr.forEach((dataMap: Map<number, string>, index) => {
+          dataMap.forEach((value, key) => {
+            const row = worksheet.getRow(2 + index);
+            row.eachCell({ includeEmpty: true }, function (cell, colNumber) {
+              if (colNumber == key) {
+                cell.value = value;
+              }
+            });
+          });
+        });
+      }
+
+      const modifiedBlob = await workbook.xlsx.writeBuffer();
+      saveAs(new Blob([modifiedBlob]), file.name);
+    };
+
+    fileReader.readAsArrayBuffer(file);
+  } catch (error) {
+    console.error("Error modifying Excel file:", error);
   }
 };

@@ -336,3 +336,7 @@ export const getSales2parties1stPositionsRequestBody = (
 
   return Sales_Order_2Parties1stPositionXMLString;
 };
+
+export const getSales3parties2ndPositionsExcelData=()=>{
+   
+}

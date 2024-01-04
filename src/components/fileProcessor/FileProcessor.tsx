@@ -19,6 +19,7 @@ import {
   getSales2parties1stPositionsRequestBody,
   getPurchase3parties2ndPositionsRequestBody,
   getPurchase2parties2ndPositionsRequestBody,
+  handleModifyExcel,
 } from "../../utils/functions";
 import { RcFile } from "antd/es/upload";
 import { selectCurrentUserAccountDetail } from "../../appStore/usersSlice";
@@ -51,43 +52,67 @@ const FileProcessor: React.FC<IFileProcessor> = ({
   );
 
   const handleProcess = async () => {
-    setIsSuccess(true);
     const dataRows = await readExcelData(fileList[0] as RcFile);
+    let dataForWritingExcel: Array<Map<number, string>> = [];
 
     for (const data of dataRows) {
-      // console.log(data);
-      // const reqBody = getXMLRequestBody(
-      //   type,
-      //   parties,
-      //   positions,
-      //   currentUserAccountDetail,
-      //   data
-      // );
+      // getXML RequestBody
+      const reqBody = getXMLRequestBody(
+        type,
+        parties,
+        positions,
+        currentUserAccountDetail,
+        data
+      );
 
+      // Call third-party endpoint
       // const res = await getSoapServiceResponse(
       //   currentUserAccountDetail.service,
       //   reqBody
       // );
-      const updateData = [
-        { TAXES_TaxResult: "Raji" },
-        { TAXES_TaxResult: "sanjayaml" },
-      ];
 
-      const ab = await (fileList[0] as RcFile).arrayBuffer();
-      const workbook = read(ab); // parse the array buffer
-      const sheetName = workbook.SheetNames[0];
-      const sheet = workbook.Sheets[sheetName];
-      utils.sheet_add_json(sheet, updateData, {
-        skipHeader: true,
-        origin: "BO2",
+      //   read XML res
+
+      //  get data for writing excel
+      dataForWritingExcel = getSales3parties2ndPositionsExcelData();
+    }
+    handleModifyExcel(fileList[0] as RcFile, dataForWritingExcel)
+      .then(() => {
+        setIsSuccess(true);
+      })
+      .catch((error) => {
+        setIsSuccess(false);
       });
-      writeFile(workbook, fileList[0].name);
+  };
 
-      //   // read XML res
-      //   // write Excel
-      //   // update success status
+  const getSales3parties2ndPositionsExcelData = (): Array<
+    Map<number, string>
+  > => {
+    try {
+      let resultArr: Array<Map<number, string>> = [];
+      let newMap = new Map();
+      newMap.set(78, "Rajitha");
+      newMap.set(79, "sport");
+
+      resultArr.push(newMap);
+
+      let newMap1 = new Map();
+      newMap1.set(78, "Sanjayamal");
+      newMap1.set(79, "Cricket");
+      resultArr.push(newMap1);
+
+      return resultArr;
+    } catch (error) {
+      return [];
     }
   };
+
+  const getDataForWritingExcel = (
+    type: processorType,
+    parties: number,
+    positions: number,
+    data: any
+  ) => {};
 
   const getXMLRequestBody = (
     type: processorType,
@@ -144,7 +169,7 @@ const FileProcessor: React.FC<IFileProcessor> = ({
   };
   const draggerProps: UploadProps = {
     name: "file",
-    accept: ".xlsx,.xls",
+    accept: ".xlsx",
     beforeUpload: (file) => {
       handleFileUpload(file);
       setIsRowCounting(true);
@@ -155,7 +180,6 @@ const FileProcessor: React.FC<IFileProcessor> = ({
     onRemove: handleFileRemove,
   };
 
-  const handleExport = async () => {};
   return (
     <>
       <Row>
@@ -168,7 +192,8 @@ const FileProcessor: React.FC<IFileProcessor> = ({
               Click or drag file to this area to upload
             </p>
             <p className="ant-upload-hint">
-              Support for a single upload and only support for the excel file.
+              Support for a single upload and only support for the excel file
+              with .xlmx format.
             </p>
           </Dragger>
         </Col>
@@ -207,9 +232,3 @@ const FileProcessor: React.FC<IFileProcessor> = ({
 };
 
 export default FileProcessor;
-function Purchase_Order_3Parties2ndPositionXMLString(
-  currentUserAccountDetail: IAccount,
-  data: any
-) {
-  throw new Error("Function not implemented.");
-}
